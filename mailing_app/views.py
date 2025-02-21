@@ -1,9 +1,9 @@
 from django.views.generic import CreateView,UpdateView, ListView, DetailView, DeleteView
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-
 from mailing_app.forms import MailingForm
 from mailing_app.models import Mail, Mailing
+
 
 
 class MailCreateView(CreateView):
@@ -57,7 +57,7 @@ class MailingListView(ListView):
 
 class MailingUpdateView(UpdateView):
     model = Mailing
-    fields = ('first_mailing', 'periodicity','status', 'clients', 'mail','is_active')
+    fields = ('next_mailing', 'frequency','status', 'clients', 'mail',)
     success_url = reverse_lazy('mailing_app:list_mailing')
 
 

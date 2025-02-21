@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.utils import timezone
 from django.db import models
 from clients_app.models import Client
 
@@ -41,7 +42,7 @@ class Mailing(models.Model):
     clients = models.ManyToManyField(Client)
     mail = models.ForeignKey(Mail, on_delete=models.CASCADE)
 
-    next_mailing = models.DateTimeField(null=False, blank=True, verbose_name='Следующая рассылка')
+    next_mailing = models.DateTimeField(null=False, blank=True, default=timezone.now, verbose_name='Следующая рассылка')
 
     def save(self, *args, **kwargs):
         if not self.next_mailing and self.first_mailing:
