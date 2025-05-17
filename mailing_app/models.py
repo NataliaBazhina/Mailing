@@ -66,7 +66,7 @@ class MailingTrying(models.Model):
 
     last_mailing = models.DateTimeField(verbose_name='последняя рассылка')
     status_trying = models.CharField(
-        max_length=2,
+        max_length= 30,
         choices=Status.choices,
         verbose_name="статус попытки")
     server_response = models.CharField(max_length=1000)
