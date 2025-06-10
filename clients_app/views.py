@@ -11,6 +11,7 @@ def base(request):
     unique = Client.objects.values("email").distinct().count()
     mailings = Mailing.objects.count()
     active_mailings = Mailing.objects.filter(status="RN").count()
+    active_mailings_list = Mailing.objects.filter(status="RN")
 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -20,9 +21,23 @@ def base(request):
 
         print(f'You have new message from {name}({email}): {message}')
     return render(request, 'clients_app/base.html', {'unique_clients': unique,
-                                                     'total_mailings': mailings, 'active_mailings': active_mailings})
+                                                     'total_mailings': mailings, 'active_mailings': active_mailings,
+                                                     'active_mailings_list': active_mailings_list})
 
+def main(request):
+    unique = Client.objects.values("email").distinct().count()
+    mailings = Mailing.objects.count()
+    active_mailings = Mailing.objects.filter(status="RN").count()
+    active_mailings_list = Mailing.objects.filter(status="RN")
 
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+    context = {'unique_clients': unique,'total_mailings': mailings, 'active_mailings': active_mailings,'active_mailings_list': active_mailings_list}
+
+    return render (request,'clients_app/main.html', context)
 
 class ClientCreateView(CreateView):
     model = Client

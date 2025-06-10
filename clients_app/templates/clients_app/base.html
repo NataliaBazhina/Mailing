@@ -185,28 +185,34 @@
 </header>
 
 <main>
-
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Управление рассылками</h1>
+    <h1 class="fw-light">Управление рассылками</h1>
                 <p class="lead text-body-secondary">Сервис для рассылок сообщений клентам</p>
                 <div class="col-lg-4">
-                <h2 class="fw-normal">Уникальных клиентов:</h2>
-                <p>{{ unique_clients }}</p>
-                    <p><a class="btn btn-secondary" href="{% url 'clients_app:list_client' %}">Посмотреть детали &raquo;</a></p>
-                </div>
-                <h2 class="fw-normal">Количество всех рассылок:</h2>
-                <p>{{ total_mailings }}</p>
-                <p><a class="btn btn-secondary" href="{% url 'mailing_app:list_mailing' %}">Посмотреть детали &raquo;</a></p>
-                </div>
-                    <h2 class="fw-normal">Количество активных рассылок:</h2>
-                    <p>{{ active_mailings }}</p>
+
+<!--    <section class="py-5 text-center container">-->
+<!--        <div class="row py-lg-5">-->
+<!--            <div class="col-lg-6 col-md-8 mx-auto">-->
+<!--                <h1 class="fw-light">Управление рассылками</h1>-->
+<!--                <p class="lead text-body-secondary">Сервис для рассылок сообщений клентам</p>-->
+<!--                <div class="col-lg-4">-->
+<!--                <h2 class="fw-normal">Уникальных клиентов:</h2>-->
+<!--                <p>{{ unique_clients }}</p>-->
+<!--                    <p><a class="btn btn-secondary" href="{% url 'clients_app:list_client' %}">Посмотреть детали &raquo;</a></p>-->
+<!--                </div>-->
+<!--                <h2 class="fw-normal">Количество всех рассылок:</h2>-->
+<!--                <p>{{ total_mailings }}</p>-->
+<!--                <p><a class="btn btn-secondary" href="{% url 'mailing_app:list_mailing' %}">Посмотреть детали &raquo;</a></p>-->
+<!--                </div>-->
+<!--                    <h2 class="fw-normal">Количество активных рассылок:</h2>-->
+<!--                    <p>{{ active_mailings }}</p>-->
+
+<!--                    <p><a class="btn btn-secondary" href="{% url 'mailing_app:list_active_mailing' %}">Посмотреть детали &raquo;</a></p>-->
 
 
 
 
-                <div class="container-fluid vh-100 d-flex flex-column justify-content-start">
+
+<!--                <div class="container-fluid vh-100 d-flex flex-column justify-content-start">-->
 
 
     {% block content %}

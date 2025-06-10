@@ -33,8 +33,10 @@
                 {% if mailing.status == 'RN' %}
                     Запущена
                     {% endif %}
+                {% if mailing.status == 'FS' %}
+                    Завершена
+                    {% endif %}
                 </p>
-                <p><strong>Актвность:</strong> {{ mailing.is_active }}</p>
 
                 <h5 class="mt-4">Клиенты:</h5>
                 <ul>

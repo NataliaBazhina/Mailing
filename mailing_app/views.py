@@ -54,6 +54,13 @@ class MailingDetailView(DetailView):
 class MailingListView(ListView):
     model = Mailing
 
+class ActiveMailingListView(ListView):
+    model = Mailing
+    template_name = "mailing_app/mailing_active_list.html"
+    context_object_name = 'active_mailing_list'
+
+    def get_queryset(self):
+        return Mailing.objects.filter(status='RN')
 
 class MailingUpdateView(UpdateView):
     model = Mailing
@@ -64,3 +71,4 @@ class MailingUpdateView(UpdateView):
 class MailingDeleteView(DeleteView):
     model = Mailing
     success_url = reverse_lazy('mailing_app:list_mailing')
+

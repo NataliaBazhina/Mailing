@@ -17,6 +17,7 @@ class Mailing(models.Model):
     class Status(models.TextChoices):
         CREATED = "CR", "Создана"
         RUNNING = "RN", "Запущена"
+        FINISHED = "FS", "Завершена"
 
     class Frequency(models.TextChoices):
         DAILY = 'DY', "Раз в день"
