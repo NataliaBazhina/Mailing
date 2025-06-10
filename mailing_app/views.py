@@ -2,8 +2,7 @@ from django.views.generic import CreateView,UpdateView, ListView, DetailView, De
 from django.urls import reverse_lazy
 from django.utils.timezone import now
 from mailing_app.forms import MailingForm
-from mailing_app.models import Mail, Mailing
-
+from mailing_app.models import Mail, Mailing, MailingTrying
 
 
 class MailCreateView(CreateView):
@@ -49,6 +48,14 @@ class MailingCreateView(CreateView):
 
 class MailingDetailView(DetailView):
     model = Mailing
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        mailing_id = self.object.id
+        context['success_count'] = MailingTrying.get_success_count(mailing_id)
+        context['failure_count'] = MailingTrying.get_failure_count(mailing_id)
+        context['sent_messages_count'] = (context['success_count'] + context['failure_count'])
+        return context
 
 
 class MailingListView(ListView):

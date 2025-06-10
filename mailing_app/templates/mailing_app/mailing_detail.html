@@ -52,6 +52,21 @@
                 <p><strong>Содержимое:</strong>
  {{ mailing.mail.content|linebreaks }}</p>
 
+
+               <li class="list-group-item">
+    <strong>Попытки рассылки:</strong>
+                    <p>Успешных попыток: {{ success_count }}</p>
+                    <p>Неуспешных попыток: {{ failure_count }}</p>
+                    <p>Отправленных сообщений: {{ sent_messages_count }}</p>
+    <ul>
+        {% for attempt in mailing.mailingtrying_set.all %}
+            <li>{{ attempt.last_mailing }} - {{ attempt.get_status_trying_display }} - {{ attempt.server_response }}</li>
+        {% empty %}
+            <li>Нет попыток рассылки.</li>
+        {% endfor %}
+    </ul>
+</li>
+
                 <div class="mt-4">
                     <a href="{% url 'mailing_app:update_mailing' object.pk %}" class="btn btn-primary">Редактировать</a>
                     <a href="{% url 'mailing_app:list_mailing' %}" class="btn btn-secondary">Назад к списку</a>

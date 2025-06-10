@@ -41,7 +41,7 @@ class Mailing(models.Model):
     )
 
     clients = models.ManyToManyField(Client)
-    mail = models.ForeignKey(Mail, on_delete=models.CASCADE)
+    mail = models.ForeignKey(Mail, on_delete=models.CASCADE, related_name='mails')
 
     next_mailing = models.DateTimeField(null=False, blank=True, default=timezone.now, verbose_name='Следующая рассылка')
 
@@ -72,3 +72,11 @@ class MailingTrying(models.Model):
         verbose_name="статус попытки")
     server_response = models.CharField(max_length=1000)
     mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, null=True, blank=True)
+
+    @classmethod
+    def get_success_count(cls, mailing_id):
+        return cls.objects.filter(mailing_id=mailing_id, status_trying=cls.Status.SUCCESS).count()
+
+    @classmethod
+    def get_failure_count(cls, mailing_id):
+        return cls.objects.filter(mailing_id=mailing_id, status_trying=cls.Status.FAILED).count()
