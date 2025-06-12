@@ -5,6 +5,9 @@
     <div class="col-12 mb-5">
         <a class="btn btn-outline-primary" href="{% url 'mailing_app:create_mailing' %}">Создать рассылку</a>
     </div>
+    <div class="col-12 mb-5">
+        <a class="btn btn-outline-primary" href="{% url 'mailing_app:list_mailing_trying' %}">Посмотреть список рассылок</a>
+    </div>
     <div class="col-md-4">
         {% for mailing in object_list %}
             <div class="card mb-4 box-shadow">

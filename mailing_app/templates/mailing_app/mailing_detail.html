@@ -55,9 +55,10 @@
 
                <li class="list-group-item">
     <strong>Попытки рассылки:</strong>
+                    <p>Отправленных сообщений: {{ sent_messages_count }}</p>
                     <p>Успешных попыток: {{ success_count }}</p>
                     <p>Неуспешных попыток: {{ failure_count }}</p>
-                    <p>Отправленных сообщений: {{ sent_messages_count }}</p>
+
     <ul>
         {% for attempt in mailing.mailingtrying_set.all %}
             <li>{{ attempt.last_mailing }} - {{ attempt.get_status_trying_display }} - {{ attempt.server_response }}</li>

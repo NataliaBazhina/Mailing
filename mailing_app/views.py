@@ -1,6 +1,8 @@
 from django.views.generic import CreateView,UpdateView, ListView, DetailView, DeleteView
 from django.urls import reverse_lazy
 from django.utils.timezone import now
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 from mailing_app.forms import MailingForm
 from mailing_app.models import Mail, Mailing, MailingTrying
 
@@ -45,7 +47,7 @@ class MailingCreateView(CreateView):
         return super().form_valid(form)
 
 
-
+@method_decorator(cache_page(60*15), name='dispatch')
 class MailingDetailView(DetailView):
     model = Mailing
 
@@ -57,7 +59,7 @@ class MailingDetailView(DetailView):
         context['sent_messages_count'] = (context['success_count'] + context['failure_count'])
         return context
 
-
+@method_decorator(cache_page(60*15), name='dispatch')
 class MailingListView(ListView):
     model = Mailing
 
@@ -79,3 +81,12 @@ class MailingDeleteView(DeleteView):
     model = Mailing
     success_url = reverse_lazy('mailing_app:list_mailing')
 
+class MailingTryingListView(ListView):
+    model = MailingTrying
+    template_name = "mailing_app/mailing_trying_list.html"
+    context_object_name = 'list_mailing_trying'
+
+class MailingTryingDetailView(DetailView):
+    model = MailingTrying
+    template_name = "mailing_app/mailing_trying_detail.html"
+    context_object_name = 'view_mailing_trying'

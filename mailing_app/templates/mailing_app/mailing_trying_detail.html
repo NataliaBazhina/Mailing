@@ -1,5 +1,5 @@
-{% extends 'mailing_app/main.html' %}
-{% load my_tags %}
+{% extends 'clients_app/base.html' %}
+
 {% block content %}
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
@@ -14,7 +14,7 @@
                         <p class="card-text">Ответ сервера: {{ object.server_response }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a class="btn btn-primary" href="{% url 'mailing:attempt_list' %}" role="button">Вернуться</a>
+                                <a class="btn btn-primary" href="{% url 'mailing_app:list_mailing_trying' %}" role="button">Вернуться</a>
                             </div>
                         </div>
                     </div>
@@ -24,4 +24,4 @@
         </div>
     </div>
 </div>
-{% endblock %}l>
+{% endblock %}>
