@@ -39,7 +39,7 @@
 
 Сначала клонируйте репозиторий с GitHub:
 
-https://github.com/NataliaBazhina/Mailing
+https://github.com/NataliaBazhina/Mailing.git
 cd mailing
 
 2. Создать и активировать виртуальное окружение
