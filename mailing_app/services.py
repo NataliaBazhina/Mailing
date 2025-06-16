@@ -1,15 +1,16 @@
-from datetime import datetime, timedelta
+from datetime import  timedelta
 from django.conf import settings
 from django.utils import timezone
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.core.mail import send_mail
 from .models import Mailing, MailingTrying
 
+
 def check_and_send_mailings():
     now = timezone.now()
     mailings = Mailing.objects.filter(
         status__in=[Mailing.Status.CREATED, Mailing.Status.RUNNING],
-        next_mailing__lte=now
+        next_mailing__lte=now,
     ).exclude(last_try__gt=now - timedelta(minutes=1))
 
     for mailing in mailings:
@@ -30,9 +31,9 @@ def check_and_send_mailings():
 
             MailingTrying.objects.create(
                 last_mailing=now,
-                status_trying='SC',
+                status_trying="SC",
                 server_response="Успешно",
-                mailing=mailing
+                mailing=mailing,
             )
 
             if mailing.frequency != Mailing.Frequency.ONCE:
@@ -46,14 +47,15 @@ def check_and_send_mailings():
         except Exception as e:
             MailingTrying.objects.create(
                 last_mailing=now,
-                status_trying='FL',
+                status_trying="FL",
                 server_response=str(e),
-                mailing=mailing
+                mailing=mailing,
             )
             mailing.status = Mailing.Status.FAILED
             mailing.save()
 
+
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(check_and_send_mailings, 'interval', minutes=1)
+    scheduler.add_job(check_and_send_mailings, "interval", minutes=1)
     scheduler.start()
