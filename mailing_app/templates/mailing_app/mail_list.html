@@ -1,6 +1,7 @@
 {% extends 'clients_app/base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="col-12 mb-5">
     <a class="btn btn-outline-primary" href="{% url 'mailing_app:create_mail' %}">Написать письмо</a>
 </div>
@@ -25,4 +26,9 @@
     </div>
     </div>
     {% endfor %}
+{% else %}
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <p>Пожалуйста войдите в систему</p>
+    </div>
+{% endif %}
 {% endblock %}

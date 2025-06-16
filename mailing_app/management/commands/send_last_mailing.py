@@ -6,7 +6,7 @@ from django.utils import timezone
 
 
 class Command(BaseCommand):
-    help = 'Отправить последнюю созданную рассылку один раз без изменения статуса и периодичности'
+    help = "Отправить последнюю созданную рассылку один раз без изменения статуса и периодичности"
 
     def handle(self, *args, **kwargs):
         mailing = Mailing.objects.filter(status=Mailing.Status.CREATED).last()
@@ -29,9 +29,9 @@ class Command(BaseCommand):
                 last_mailing=timezone.now(),
                 status_trying=True,
                 server_response="Письма отправлены",
-                mailing=mailing
+                mailing=mailing,
             )
 
             print(f'Рассылка "{mailing}" была успешно отправлена.')
         else:
-            print('Нет созданных рассылок для отправки.')
+            print("Нет созданных рассылок для отправки.")

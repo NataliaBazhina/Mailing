@@ -9,36 +9,79 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('clients_app', '0001_initial'),
+        ("clients_app", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Mail',
+            name="Mail",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('topic', models.CharField(max_length=35, verbose_name='тема письма')),
-                ('content', models.TextField(verbose_name='тело письма')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("topic", models.CharField(max_length=35, verbose_name="тема письма")),
+                ("content", models.TextField(verbose_name="тело письма")),
             ],
         ),
         migrations.CreateModel(
-            name='MailingTrying',
+            name="MailingTrying",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('last_mailing', models.DateTimeField(verbose_name='последняя рассылка')),
-                ('status_trying', models.BooleanField()),
-                ('server_response', models.CharField(max_length=35)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "last_mailing",
+                    models.DateTimeField(verbose_name="последняя рассылка"),
+                ),
+                ("status_trying", models.BooleanField()),
+                ("server_response", models.CharField(max_length=35)),
             ],
         ),
         migrations.CreateModel(
-            name='Mailing',
+            name="Mailing",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_mailing', models.DateTimeField(blank=True, null=True, verbose_name='первая рассылка')),
-                ('periodicity', models.PositiveBigIntegerField(default=60, verbose_name='переодичность')),
-                ('status', models.CharField(max_length=35, verbose_name='статус')),
-                ('clients', models.ManyToManyField(to='clients_app.client')),
-                ('mail', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mailing_app.mail')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "first_mailing",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="первая рассылка"
+                    ),
+                ),
+                (
+                    "periodicity",
+                    models.PositiveBigIntegerField(
+                        default=60, verbose_name="переодичность"
+                    ),
+                ),
+                ("status", models.CharField(max_length=35, verbose_name="статус")),
+                ("clients", models.ManyToManyField(to="clients_app.client")),
+                (
+                    "mail",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="mailing_app.mail",
+                    ),
+                ),
             ],
         ),
     ]

@@ -16,26 +16,28 @@ class UserCreateView(CreateView):
     success_url = reverse_lazy("users_app:login")
 
     def form_valid(self, form):
-         user = form.save()
-         user.is_active = False
-         token = secrets.token_hex(16)
-         user.token = token
-         user.save()
-         host = self.request.get_host()
-         url = f'http://{host}/users/email-confirm/{token}/'
-         send_mail(
-             subject='Подтверждение почты',
-             message=f'Привет, перейди по ссылке для подтверждения почты {url}',
-             from_email=EMAIL_HOST_USER,
-             recipient_list=[user.email]
-         )
-         return super().form_valid(form)
+        user = form.save()
+        user.is_active = False
+        token = secrets.token_hex(16)
+        user.token = token
+        user.save()
+        host = self.request.get_host()
+        url = f"http://{host}/users/email-confirm/{token}/"
+        send_mail(
+            subject="Подтверждение почты",
+            message=f"Привет, перейди по ссылке для подтверждения почты {url}",
+            from_email=EMAIL_HOST_USER,
+            recipient_list=[user.email],
+        )
+        return super().form_valid(form)
+
 
 def email_verification(request, token):
     user = get_object_or_404(User, token=token)
     user.is_active = True
     user.save()
-    return redirect(reverse('users:login'))
+    return redirect(reverse("users:login"))
+
 
 def change_password(
     request,
@@ -58,7 +60,7 @@ def change_password(
                 new_password = User.make_random_password(12)
                 user.set_password(new_password)
                 user.save()
-                print(f'Письмо отправлено{user.email}')
+                print(f"Письмо отправлено{user.email}")
                 send_mail(
                     subject="Новый пароль",
                     message=f"Ваш новый пароль: {new_password}",
@@ -68,8 +70,7 @@ def change_password(
                 return redirect(reverse("users:login"))
     elif request.method == "GET":
         return render(
-            request, "users_app/change_password.html", {"form": UserChangePasswordForm()}
+            request,
+            "users_app/change_password.html",
+            {"form": UserChangePasswordForm()},
         )
-
-
-

@@ -6,16 +6,23 @@
     <title>{% if object %}Редактировать рассылку{% else %}Создать рассылку{% endif %}</title>
 </head>
 <body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type = "submit"/>
-        <button type="submit" class="btn btn-success">
-            {% if object %}
-            Сохранить
-            {% else %}
-            Создать
-            {% endif %}</button>
+    <button type="submit" name= "action" value ="send_now" >
+    Отправить сейчас
+    </button>
+        <button type="submit"  class="btn btn-success" name="action" value="create_mailing">
+        Создать рассылку
+        </button>
     </form>
 </body>
 </html>
+

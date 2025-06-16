@@ -7,19 +7,45 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Client',
+            name="Client",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254, unique=True, verbose_name='почта')),
-                ('name', models.CharField(max_length=35, verbose_name='имя клиента')),
-                ('surname', models.CharField(max_length=35, verbose_name='фамилия клиента')),
-                ('second_name', models.CharField(blank=True, max_length=35, null=True, verbose_name='отчество клиента')),
-                ('comment', models.TextField(blank=True, null=True, verbose_name='комментарий')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        max_length=254, unique=True, verbose_name="почта"
+                    ),
+                ),
+                ("name", models.CharField(max_length=35, verbose_name="имя клиента")),
+                (
+                    "surname",
+                    models.CharField(max_length=35, verbose_name="фамилия клиента"),
+                ),
+                (
+                    "second_name",
+                    models.CharField(
+                        blank=True,
+                        max_length=35,
+                        null=True,
+                        verbose_name="отчество клиента",
+                    ),
+                ),
+                (
+                    "comment",
+                    models.TextField(blank=True, null=True, verbose_name="комментарий"),
+                ),
             ],
         ),
     ]

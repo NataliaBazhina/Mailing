@@ -11,7 +11,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <p class="card-text">Рассылка: {{ item.mailing.mail.topic }}</p>
-                        <p class="card-text">Статус рассылки: {{ item.status_trying }}</p>
+                        <p class="card-text">Статус рассылки: {{ item.get_status_trying_display }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-primary" href="{% url 'mailing_app:view_mailing_trying' item.pk %}"
@@ -22,6 +22,7 @@
                     </div>
                 </div>
             </div>
+
             {% endif %}
             {% endfor %}
         </div>

@@ -5,5 +5,3 @@ from .models import User
 
 admin.site.register(Permission)
 admin.site.register(User)
-
-
